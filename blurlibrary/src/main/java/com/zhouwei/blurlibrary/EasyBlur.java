@@ -62,6 +62,12 @@ public class EasyBlur {
                 Log.d(TAG,"blur fast algorithm");
                 return  fastBlur(mBitmap,mScale,mRadius);
             }else{
+                try {
+                    Class.forName("android.support.v8.renderscript.RenderScript");
+                } catch (Throwable throwable) {
+                    Log.d(TAG, "RenderScript is no support");
+                    return fastBlur(mBitmap, mScale, mRadius);
+                }
                 Log.d(TAG,"blur render script  algorithm");
                 return rsBlur(mContext,mBitmap,mRadius,mScale);
             }
